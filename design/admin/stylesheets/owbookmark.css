@@ -1,0 +1,50 @@
+.owbookmark_list .star {
+    vertical-align: top;
+}
+.owbookmark_list .class_list {
+    margin: 5px 0;
+}
+
+.owbookmark_list .class_list form {
+    display: inline;
+    margin: 0 5px 0 0;
+}
+
+.owbookmark_list .class_list form input.button_add {
+    background: #FFF url(../images/icons/add-16.png) no-repeat left center;
+    padding-left: 20px;
+    margin-left: 0;
+    margin-bottom: 2px;
+}
+.owbookmark_list .class_list form input.button_add:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.owbookmark_list .popin {
+    display: none;
+}
+.popin input.button_delete {
+    background-color: #E54040;
+    color: #FFF;
+}
+.popin input.button_delete:hover {
+    background-color: #D53030;
+}
+.popin .box {
+    width: 80%;
+}
+.popin hr {
+    margin: 20px 0 10px 0;
+}
+
+.tooltipster-default .tooltipster-content {
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.fancybox-title {
+    border-bottom: 1px solid #e7e8e0;
+    margin-bottom: 10px;
+    padding: 0 0 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}

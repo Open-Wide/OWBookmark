@@ -1,0 +1,1 @@
+{* NOTHING IN THE SIDEBAR *}

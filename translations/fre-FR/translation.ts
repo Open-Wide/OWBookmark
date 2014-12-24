@@ -2,10 +2,10 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fr_FR">
 	<context>
-		<name>context/name/string</name>
+		<name>owbookmark</name>
 		<message>
-			<source>src string</source>
-			<translation>translated string</translation>
+			<source>Add</source>
+			<translation>Ajouter</translation>
 		</message>
 	</context>
 </TS>
