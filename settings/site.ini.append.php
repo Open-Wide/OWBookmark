@@ -3,4 +3,7 @@
 [RegionalSettings]
 TranslationExtensions[]=owbookmark
 
+[TemplateSettings]
+ExtensionAutoloadPath[]=owbookmark
+
 */

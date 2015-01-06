@@ -1,21 +1,26 @@
 {def
     $min_class_count = ezini( 'OwBookmarkSettings', 'MinClassCountComboList', 'owbookmark.ini' )
-    $use_quick_add_objects = ezini( 'OwBookmarkSettings', 'UseQuickAddObjects', 'owbookmark.ini' )
+    $display_class_icon = ezini( 'OwBookmarkSettings', 'DisplayClassIcon', 'owbookmark.ini' )
+    $display_content_type_column = ezini( 'OwBookmarkSettings', 'DisplayContentTypeColumn', 'owbookmark.ini' )
+    $use_quick_add_objects = fetch( 'user', 'has_access_to', hash( 'module', 'owbookmark', 'function', 'quickaddchild' ) )
     $bookmark_list = fetch( 'content', 'bookmarks' )
-    $bookmark_node = 0
+    $bookmark_node = false
     $can_create_class_list = false
     $temp_node = false
     $path_string = false
-    $popin_id = false
+    $owbookmark_custom = false
     $bookmark_title = ''
 }
 
+<h2>{'My bookmarks'|i18n( 'design/admin/parts/my/menu' )}</h2>
 {if $bookmark_list}
-    <h2>{'Bookmarks'|i18n( 'design/admin/pagelayout' )}</h2>
     <table class="list owbookmark_list">
         <tr>
             <th class="tight"></th>
-            <th>{'Name'|i18n( 'design/admin/dashboard/drafts' )}</th>
+            <th>{'Name'|i18n( 'design/admin/content/bookmark' )}</th>
+            {if $display_content_type_column|eq(true())}
+            <th>{'Type'|i18n( 'design/admin/content/bookmark' )}</th>
+            {/if}
             <th class="tight"></th>
         </tr>
         {foreach $bookmark_list as $bookmark sequence array( 'bglight', 'bgdark' ) as $style}
@@ -23,9 +28,14 @@
                 $bookmark_node = $bookmark.node
                 $can_create_class_list = $bookmark_node.object.can_create_class_list
                 $path_string = hash()
-                $popin_id = concat("fancybox_bookmark_", $bookmark_node.object.id)
-                $bookmark_title = '@TODO'
+                $owbookmark_custom = owbookmark_get($bookmark.id)
             }
+            {if $owbookmark_custom}
+                {set $bookmark_title = $owbookmark_custom.name}
+            {else}
+                {set $bookmark_title = $bookmark_node.name}
+            {/if}
+            {undef $owbookmark_custom}
             {foreach $bookmark_node.path_array as $k => $id}
                 {if $k|lt(3)} {continue} {/if}
                 {set
@@ -35,9 +45,14 @@
             {/foreach}
 
             <tr class="{$style}">
-                <td class="star"><a href="#{$popin_id}" class="fancybox fancybox_inline" title="{$bookmark_node.name|wash}"><img src={'icons/star-16-on.png'|ezimage} /></a></td>
+                <td class="star">
+                    {include uri='design:owbookmark/popin_update.tpl' icon_size='16' redirect_uri='/content/dashboard'}
+                </td>
                 <td>
-                    <span><a href={$bookmark_node.url_alias|ezurl} title="{$path_string|implode(' &raquo; ')}" class="tooltip">{$bookmark_node.name|wash}</a></span>
+                    {if $display_class_icon|eq(true())}
+                        {$bookmark_node.class_identifier|class_icon( small, $bookmark_node.class_name )}
+                    {/if}
+                    <span><a href={$bookmark_node.url_alias|ezurl} title="{$path_string|implode(' &raquo; ')}" class="tooltip">{$bookmark_title|wash}</a></span>
                     {if and($use_quick_add_objects|eq(true()), $can_create_class_list|count|gt(0))}
                         <br />
                         <div class="class_list">
@@ -55,7 +70,7 @@
                                     <option value="{$class.id}">{$class.name|wash}</option>
                                     {/foreach}
                                 </select>
-                                <input type="submit" value="{'Add'|i18n( 'owbookmark' )}" class="button button_add" />
+                                <input type="submit" value="{'Add'|i18n( 'design/admin/owbookmark' )}" class="button button_add" />
                             </form>
                         {else}
                             {foreach $can_create_class_list as $class}
@@ -74,9 +89,12 @@
 
                         </div>
                     {/if}
-
-                    {include uri="design:owbookmark/popin_update.tpl" popin_id=$popin_id node=$bookmark_node title=$bookmark_title}
                 </td>
+
+                {if $display_content_type_column|eq(true())}
+                    <td>{$bookmark_node.class_name|wash()}</td>
+                {/if}
+
                 <td>
                     {if $bookmark_node.can_edit}
                         <a href="{concat( '/content/edit/', $bookmark_node.object.id, '/f/', $bookmark_node.object.default_language )|ezurl('no')}" title="{'Edit <%draft_name>.'|i18n( 'design/admin/dashboard/drafts',, hash( '%draft_name', $bookmark_node.name ) )|wash()}">
@@ -89,5 +107,10 @@
             </tr>
         {/foreach}
     </table>
+{else}
+    <p>{"You have no bookmarks"|i18n("design/standard/content/view")}</p>
 {/if}
+<form name="bookmarkaction" action={concat( 'content/bookmark/' )|ezurl} method="post" >
+    <p><input class="button" type="submit" name="AddButton" value="{'Add items'|i18n( 'design/admin/content/bookmark' )}" title="{'Add items to your personal bookmark list.'|i18n( 'design/admin/content/bookmark' )}" /></p>
+</form>
 {undef $bookmark_list $bookmark_node}

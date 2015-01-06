@@ -13,6 +13,7 @@ function applyFancyBox(id) {
         type: 'inline',
         autoSize : false,
         autoHeight: true,
+        title: '',
         helpers : {
             title: {
                 type: 'inside',

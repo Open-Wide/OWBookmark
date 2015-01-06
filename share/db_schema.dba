@@ -1,0 +1,33 @@
+<?php
+
+// This array contains the database schema
+
+$fields = array(
+    'bookmark_id' => array(
+        'type' => 'integer',
+        'not_null' => true,
+        'default' => false,
+    ),
+    'name' => array(
+        'length' => 255,
+        'type' => 'varchar',
+        'not_null' => true,
+        'default' => false,
+    )
+);
+
+$schema = array(
+    'owbookmark_custom' => array(
+        'name' => 'owbookmark_custom',
+        'fields' => $fields,
+        'indexes' => array(
+            'PRIMARY' => array(
+                'type' => 'primary',
+                'fields' => array(
+                    'bookmark_id'
+                )
+            )
+        )
+    ),
+    '_info' => array( 'format' => 'generic', )
+);

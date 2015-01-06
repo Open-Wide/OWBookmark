@@ -2,10 +2,15 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fr_FR">
 	<context>
-		<name>owbookmark</name>
+		<name>design/admin/owbookmark</name>
 		<message>
 			<source>Add</source>
 			<translation>Ajouter</translation>
 		</message>
+		<message>
+			<source>Customize the name of the bookmark</source>
+			<translation>Personnaliser le nom du signet</translation>
+		</message>
+
 	</context>
 </TS>

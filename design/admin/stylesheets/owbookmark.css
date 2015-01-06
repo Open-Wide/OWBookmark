@@ -19,20 +19,20 @@
 .owbookmark_list .class_list form input.button_add:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
-.owbookmark_list .popin {
+.owbookmark.popin {
     display: none;
 }
-.popin input.button_delete {
+.owbookmark.popin input.button_delete {
     background-color: #E54040;
     color: #FFF;
 }
-.popin input.button_delete:hover {
+.owbookmark.popin input.button_delete:hover {
     background-color: #D53030;
 }
-.popin .box {
+.owbookmark.popin .box {
     width: 80%;
 }
-.popin hr {
+.owbookmark.popin hr {
     margin: 20px 0 10px 0;
 }
 
