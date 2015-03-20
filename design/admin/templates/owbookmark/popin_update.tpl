@@ -43,9 +43,9 @@
 {def
     $popin_id = concat("fancybox_bookmark_", $bookmark_node.object.id)
 }
-<a href="#{$popin_id}" class="fancybox fancybox_inline" title="{"Edit"|i18n("design/admin/popupmenu")}">
-    <img src={concat('icons/star-', $icon_size, '-', $icon_state, '.png')|ezimage} />
-</a>
+<a href="#{$popin_id}" class="fancybox fancybox_inline" title="{"Edit"|i18n("design/admin/popupmenu")}">{*
+    *}<img src={concat('icons/star-', $icon_size, '-', $icon_state, '.png')|ezimage} />{*
+*}</a>
 
 <div class="owbookmark popin" id="{$popin_id}">
     <form action={"/owbookmark/update"|ezurl} method="post" class="form_bookmark">
