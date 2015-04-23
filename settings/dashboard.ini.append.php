@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf-8"?
 
-[DashboardSettings]
-DashboardBlocks[]=enhanced_bookmarks
+#[DashboardSettings]
+#DashboardBlocks[]=enhanced_bookmarks
 
 [DashboardBlock_enhanced_bookmarks]
 Priority=10
